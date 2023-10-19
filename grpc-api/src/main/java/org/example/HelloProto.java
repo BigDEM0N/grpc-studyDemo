@@ -1138,11 +1138,13 @@ public final class HelloProto {
   static {
     java.lang.String[] descriptorData = {
       "\n\013Hello.proto\"\034\n\014HelloRequest\022\014\n\004name\030\001 " +
-      "\001(\t\"\037\n\rHelloResponse\022\016\n\006result\030\001 \001(\t2c\n\014" +
-      "HelloService\022(\n\005hello\022\r.HelloRequest\032\016.H" +
-      "elloResponse\"\000\022)\n\004c2ss\022\r.HelloRequest\032\016." +
-      "HelloResponse\"\0000\001B\033\n\013org.exampleB\nHelloP" +
-      "rotoP\000b\006proto3"
+      "\001(\t\"\037\n\rHelloResponse\022\016\n\006result\030\001 \001(\t2\274\001\n" +
+      "\014HelloService\022(\n\005hello\022\r.HelloRequest\032\016." +
+      "HelloResponse\"\000\022)\n\004c2ss\022\r.HelloRequest\032\016" +
+      ".HelloResponse\"\0000\001\022)\n\004cs2s\022\r.HelloReques" +
+      "t\032\016.HelloResponse\"\000(\001\022,\n\005cs2ss\022\r.HelloRe" +
+      "quest\032\016.HelloResponse\"\000(\0010\001B\033\n\013org.examp" +
+      "leB\nHelloProtoP\000b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -19,6 +19,12 @@ message HelloResponse{
 service HelloService{
   rpc hello(HelloRequest) returns (HelloResponse){}
 
-  //客户端流式rpc
+  //服务端流式rpc
   rpc c2ss(HelloRequest) returns (stream HelloResponse){}
+
+  //客户端流式rpc
+  rpc cs2s(stream HelloRequest) returns (HelloResponse){}
+
+  //双向流式rpc
+  rpc cs2ss(stream HelloRequest) returns (stream HelloResponse){}
 }

@@ -407,7 +407,7 @@ public void c2ss(HelloProto.HelloRequest request, StreamObserver<HelloProto.Hell
         responseObserver.onCompleted();
     }
 
-//服务端
+//客户端
 Iterator<HelloProto.HelloResponse> helloResponseIterator = helloService.c2ss(helloRequest);
             while(helloResponseIterator.hasNext()){
                 HelloProto.HelloResponse helloResponse = helloResponseIterator.next();
@@ -417,7 +417,7 @@ Iterator<HelloProto.HelloResponse> helloResponseIterator = helloService.c2ss(hel
 
 **阻塞stub，需要服务端把所有数据传完才开始之后的流程**
 
-监听异步方式：
+**监听异步方式：**
 
 api和服务端没有变化
 
@@ -429,8 +429,167 @@ responseObserver监控：
 2. onError()
 3. onCompleted()
 
+```java
+public class GrpcClient3 {
+    public static void main(String[] args) throws InterruptedException {
+        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost",9000).usePlaintext().build();
+        try{
+            HelloServiceGrpc.HelloServiceStub helloService = HelloServiceGrpc.newStub(managedChannel);
+
+            HelloProto.HelloRequest.Builder builder = HelloProto.HelloRequest.newBuilder();
+            builder.setName("client3");
+            HelloProto.HelloRequest helloRequest = builder.build();
+
+            List<HelloProto.HelloResponse> list = new ArrayList<>();
+            helloService.c2ss(helloRequest, new StreamObserver<HelloProto.HelloResponse>() {
+                @Override
+                public void onNext(HelloProto.HelloResponse helloResponse) {
+                    System.out.println(helloResponse.getResult());
+                    list.add(helloResponse);
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+
+                }
+
+                @Override
+                public void onCompleted() {
+                    System.out.println(list);
+                    System.out.println("end");
+                }
+            });
+            managedChannel.awaitTermination(12,TimeUnit.SECONDS);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            managedChannel.shutdown();
+            System.out.println("shut dowm");
+        }
+    }
+}
 ```
 
+**异步编程**因为没有阻塞 顺序执行了代码，服务端响应较慢，客户端执行太快，直接结束了，在shutdown之前加入
+
+```java
+managedChannel.awaitTermination(12 , TimeUnit.SECONDS);
 ```
 
-**异步编程**因为没有阻塞 顺序执行了代码，服务端响应较慢，客户端执行太快，直接结束了
+
+
+### 客户端流式rpc
+
+```protobuf
+rpc cs2ss(stream HelloRequest) returns (stream HelloResponse){}
+```
+
+```java
+/**
+	客户端发送request时使用observer，即requestObserver
+*/
+public class GrpcClient4 {
+    public static void main(String[] args) {
+        ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost" ,9000).usePlaintext().build();
+
+        try {
+            HelloServiceGrpc.HelloServiceStub helloService  = HelloServiceGrpc.newStub(managedChannel);
+            //这里cs2s返回的是observer，我们就使用这个observer来发送请求，再通过cs2s的参数observer来接受服务端发来的响应
+            StreamObserver<HelloProto.HelloRequest> helloRequestStreamObserver = helloService.cs2s(new StreamObserver<HelloProto.HelloResponse>() {
+                @Override
+                public void onNext(HelloProto.HelloResponse helloResponse) {
+                    System.out.println(helloResponse.getResult());
+                }
+
+                @Override
+                public void onError(Throwable throwable) {
+
+                }
+
+                @Override
+                public void onCompleted() {
+                    System.out.println("cs2s onCompleted");
+                }
+            });
+
+            for(int i = 0;i< 10;i++){
+                helloRequestStreamObserver.onNext(HelloProto.HelloRequest.newBuilder().setName("client send "+i).build());
+                Thread.sleep(1000);
+            }
+            helloRequestStreamObserver.onCompleted();
+            managedChannel.awaitTermination(12 , TimeUnit.SECONDS);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            managedChannel.shutdown();
+        }
+    }
+}
+
+/**
+	服务端接受
+*/
+ public StreamObserver<HelloProto.HelloRequest> cs2s(StreamObserver<HelloProto.HelloResponse> responseObserver) {
+     //这里的return就是将这个observer给到了client   
+     return new StreamObserver<HelloProto.HelloRequest>() {
+            @Override
+            public void onNext(HelloProto.HelloRequest helloRequest) {
+                System.out.println("request "+ helloRequest.getName());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("finished");
+                responseObserver.onNext(HelloProto.HelloResponse.newBuilder().setResult("server end").build());
+                responseObserver.onCompleted();
+            }
+        };
+    }
+```
+
+### 双向流式rpc
+
+api
+
+```protobuf
+  rpc cs2ss(stream HelloRequest) returns (stream HelloResponse){}
+```
+
+客户端和客户端流式rpc没有太大区别
+
+服务端
+
+```java
+ /**
+     * 双向流式rpc服务端
+     * */
+    @Override
+    public StreamObserver<HelloProto.HelloRequest> cs2ss(StreamObserver<HelloProto.HelloResponse> responseObserver) {
+        return new StreamObserver<HelloProto.HelloRequest>() {
+            @Override
+            public void onNext(HelloProto.HelloRequest helloRequest) {
+                System.out.println("服务端 接收 "+ helloRequest.getName());
+                //responseObserver.onNext多次调用即完成了流式传输
+                responseObserver.onNext(HelloProto.HelloResponse.newBuilder().setResult("服务端 回复 "+ helloRequest.getName()).build());
+            }
+
+            @Override
+            public void onError(Throwable throwable) {
+
+            }
+
+            @Override
+            public void onCompleted() {
+                System.out.println("服务端 接收 结束");
+                responseObserver.onCompleted();
+            }
+        };
+    }
+```
+
