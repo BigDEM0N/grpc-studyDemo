@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+option java_package = "org.example";
+option java_outer_classname = "HelloProto";
+
+/*
+  IDL文件的目的是发布RPC服务，管理服务端和客户端 和两者之间的消息
+*/
+
+message HelloRequest{
+  string name = 1;
+}
+
+message HelloResponse{
+  string result =1;
+}
+
+service HelloService{
+  rpc hello(HelloRequest) returns (HelloResponse){}
+
+  //客户端流式rpc
+  rpc c2ss(HelloRequest) returns (stream HelloResponse){}
+}
