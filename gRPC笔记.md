@@ -593,3 +593,117 @@ api
     }
 ```
 
+## gRPC和Spring boot
+
+### gRPC和SpringBoot整合的思想
+
+需要完成
+
+```
+grpc-api :新建module手动写并且编译
+grpc-client :
+grpc-server :实现服务接口，创建服务端发布gRPC功能
+```
+
+### server
+
+步骤：
+
+1. 引入依赖
+
+   ```xml
+    		<dependency>
+               <groupId>org.example</groupId>
+               <artifactId>grpc-api</artifactId>
+               <version>1.0-SNAPSHOT</version>
+           </dependency>
+   
+           <dependency>
+               <groupId>net.devh</groupId>
+               <artifactId>grpc-server-spring-boot-starter</artifactId>
+               <version>2.14.0.RELEASE</version>
+           </dependency>
+   ```
+
+2. 配置文件
+
+   ```yml
+   spring:
+     application:
+       name: grpc-spring-server1
+   
+     main:
+       web-application-type: none
+   
+   grpc:
+     server:
+       port: 9000
+   ```
+
+3. 完成服务端端口`/service/HelloServiceImpl.class` 通过`@GrpcService`完成服务发布
+
+   ```java
+   /**
+    * 服务端接口的实现
+    * */
+   @GrpcService
+   public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
+       @Override
+       public void hello(HelloProto.HelloRequest request, StreamObserver<HelloProto.HelloResponse> responseObserver) {
+           String name = request.getName();
+           System.out.println("服务端 接收 "+name);
+   
+           responseObserver.onNext(HelloProto.HelloResponse.newBuilder().setResult("服务端接收成功 返回 "+name).build());
+           responseObserver.onCompleted();
+       }
+   }
+   ```
+
+### client
+
+1. 引入依赖
+
+   ```xml
+   		<dependency>
+               <groupId>org.example</groupId>
+               <artifactId>grpc-api</artifactId>
+               <version>1.0-SNAPSHOT</version>
+           </dependency>
+   
+           <dependency>
+               <groupId>net.devh</groupId>
+               <artifactId>grpc-client-spring-boot-starter</artifactId>
+               <version>2.14.0.RELEASE</version>
+           </dependency>
+       </dependencies>
+   ```
+
+2. 配置文件
+
+   ```yml
+   spring:
+     application:
+       name: grpc-spring-client1
+   
+   grpc:
+     client:
+       grpc-server:
+         address: "static://127.0.0.1:9000"
+         negotiation-type: plaintext
+   
+   
+   ```
+
+3. 添加代理访问服务端
+
+   ```java
+   //注入stub
+   @GrpcClient("grpc-server")
+   private HelloServiceGrpc.HelloServiceBlockingStub helloService;
+   
+   HelloProto.HelloResponse helloResponse = helloService.hello(HelloProto.HelloRequest.newBuilder().setName(name).build());
+   String result = helloResponse.getResult();
+   ```
+
+   
+

@@ -5,6 +5,9 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/grpc-spring-server/pom.xml" />
+        <option value="$PROJECT_DIR$/grpc-spring-server1/pom.xml" />
+        <option value="$PROJECT_DIR$/grpc-spring-client1/pom.xml" />
       </list>
     </option>
   </component>

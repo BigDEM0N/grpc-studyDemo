@@ -40,7 +40,7 @@ public class HelloServiceImpl extends HelloServiceGrpc.HelloServiceImplBase {
         //获取提交的参数
         String name = request.getName();
         //业务处理
-        System.out.println("this is request" + name);
+        System.out.println("this is request " + name);
         //提供返回值 封装响应
         // 1.创建响应对象的构造者
         // 2.填充数据

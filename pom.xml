@@ -12,6 +12,9 @@
         <module>grpc-api</module>
         <module>grpc-service</module>
         <module>grpc-client</module>
+        <module>grpc-spring-server</module>
+        <module>grpc-spring-server1</module>
+        <module>grpc-spring-client1</module>
     </modules>
 
     <properties>

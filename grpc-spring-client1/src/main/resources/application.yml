@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: grpc-spring-client1
+
+grpc:
+  client:
+    grpc-server:
+      address: "static://127.0.0.1:9000"
+      negotiation-type: plaintext
+
