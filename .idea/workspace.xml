@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97fd1c60-18fd-4122-babe-6fb5eaa8954d" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/etcd-register/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/src/main/java/com/example/etcdregister/EtcdRegisterApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/src/main/resources/application.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/etcd-register/src/test/java/com/example/etcdregister/EtcdRegisterApplicationTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gRPC笔记.md" beforeDir="false" afterPath="$PROJECT_DIR$/gRPC笔记.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/grpc-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/grpc-service/src/main/java/org/example/service/HelloServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/grpc-service/src/main/java/org/example/service/HelloServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +33,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/grpc-spring-client1" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/etcd-register" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -45,32 +51,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "D:/._Work/Code/LearningDemo/grpc-studyDemo/grpc-spring-server1/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "f92442e3f3155b594e74f3e7ecfe1be0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/._Work/Code/LearningDemo/grpc-studyDemo/grpc-spring-server1/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;7b1dbd221a81bb6d24bfc6089c2b6122&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\._Work\Code\LearningDemo\grpc-studyDemo\grpc-spring-server1\src\main\resources" />
@@ -90,7 +96,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GrpcSpringServerApplication">
+  <component name="RunManager" selected="Spring Boot.EtcdRegisterApplication">
     <configuration name="GrpcClient1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.GrpcClient1" />
       <module name="grpc-client" />
@@ -156,6 +162,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="EtcdRegister1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="etcd-register1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.etcdregister1.EtcdRegister1Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EtcdRegisterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="etcd-register" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.etcdregister.EtcdRegisterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GrpcSpringClient1Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="grpc-spring-client1" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.grpcspringclient1.GrpcSpringClient1Application" />
@@ -202,6 +222,9 @@
       <workItem from="1697727750437" duration="4571000" />
       <workItem from="1697773207789" duration="5118000" />
       <workItem from="1697784393711" duration="4559000" />
+      <workItem from="1697875729544" duration="3361000" />
+      <workItem from="1697943192803" duration="3794000" />
+      <workItem from="1697985758448" duration="5408000" />
     </task>
     <servers />
   </component>

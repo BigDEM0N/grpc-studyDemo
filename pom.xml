@@ -15,6 +15,7 @@
         <module>grpc-spring-server</module>
         <module>grpc-spring-server1</module>
         <module>grpc-spring-client1</module>
+        <module>etcd-register1</module>
     </modules>
 
     <properties>
