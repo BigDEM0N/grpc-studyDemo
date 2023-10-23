@@ -7,6 +7,8 @@ import io.etcd.jetcd.Lease;
 import io.etcd.jetcd.lease.LeaseGrantResponse;
 import io.etcd.jetcd.lease.LeaseKeepAliveResponse;
 import io.etcd.jetcd.options.PutOption;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import io.grpc.stub.CallStreamObserver;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 
@@ -30,7 +33,8 @@ public class EtcdServiceRegistry {
     @Value("${service.address}")
     private String serviceAddress;
 
-    private final CountDownLatch latch = new CountDownLatch(1);
+    @Value("${service.port}")
+    private int port;
 
     @PostConstruct
     @Async
@@ -77,7 +81,6 @@ public class EtcdServiceRegistry {
 
                 @Override
                 public void onNext(LeaseKeepAliveResponse leaseKeepAliveResponse) {
-                    System.out.println("续租完成");
                 }
 
                 @Override
@@ -94,8 +97,11 @@ public class EtcdServiceRegistry {
 
     }
 
-    @Scheduled(fixedRate = 6000)
-    public void log(){
-        System.out.println("wait");
+    @PostConstruct
+    public void publishService() throws IOException, InterruptedException {
+        Server server = ServerBuilder.forPort(port).addService(new HelloServiceImpl()).build();
+        server.start();
+        server.awaitTermination();
     }
+
 }

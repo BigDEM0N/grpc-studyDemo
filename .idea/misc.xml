@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/grpc-spring-server1/pom.xml" />
         <option value="$PROJECT_DIR$/grpc-spring-client1/pom.xml" />
         <option value="$PROJECT_DIR$/etcd-register/pom.xml" />
+        <option value="$PROJECT_DIR$/etcd-client/pom.xml" />
       </list>
     </option>
   </component>

@@ -1,0 +1,14 @@
+etcd:
+  url: http://localhost:2379
+
+service:
+  name: testClient
+  address: http://127.0.0.1:8081
+
+spring:
+  application:
+    name: grpc-spring-client
+
+server:
+  port: 8081
+

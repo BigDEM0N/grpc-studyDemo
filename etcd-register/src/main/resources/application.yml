@@ -4,7 +4,18 @@ etcd:
 service:
   name: testService
   address: http://127.0.0.1:9000
+  port: 9000
 
 spring:
   application:
     name: grpc-spring-server1
+  main:
+    web-application-type: none
+#tomcat服务端口
+#server:
+#  port: 9000
+
+
+grpc:
+  server:
+    port: 9000
